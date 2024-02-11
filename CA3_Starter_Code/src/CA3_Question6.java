@@ -44,7 +44,7 @@ public class CA3_Question6
                 if(blocks.isEmpty()) {
                     System.out.println("No shares to sell");
                 } else {
-                    Share block = blocks.poll();
+                    Share block = blocks.peek();
                     if(block.getQuantity() < sellQuantity) {
                         System.out.println("Not enough shares to sell");
                         blocks.add(block);
