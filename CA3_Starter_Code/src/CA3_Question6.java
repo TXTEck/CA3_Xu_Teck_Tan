@@ -20,11 +20,11 @@ public class CA3_Question6
         Scanner keyboard = new Scanner(System.in);
         double totalBought = 0;
         double totalSold = 0;
-        String input = "";
+        String command = "";
         do {
             System.out.println("Enter buy, sell or quit: ");
-            input = keyboard.nextLine();
-            if(input.equalsIgnoreCase("buy")) {
+            command = keyboard.nextLine();
+            if(command.equalsIgnoreCase("buy")) {
                 System.out.println("Enter buy quantity");
                 int buyQuantity = keyboard.nextInt();
                 keyboard.nextLine();
@@ -34,7 +34,7 @@ public class CA3_Question6
                 blocks.add(new Share(buyQuantity, price));
                 totalBought += buyQuantity * price;
             }
-            else if(input.equalsIgnoreCase("sell")) {
+            else if(command.equalsIgnoreCase("sell")) {
                 System.out.println("Enter sell quantity");
                 int sellQuantity = keyboard.nextInt();
                 keyboard.nextLine();
@@ -58,7 +58,7 @@ public class CA3_Question6
                     }
                 }
             }
-        } while(!input.equalsIgnoreCase("quit"));
+        } while(!command.equalsIgnoreCase("quit"));
 
         System.out.println("Total gains: " + (totalSold - totalBought));
     }

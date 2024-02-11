@@ -1,53 +1,55 @@
-import java.util.Scanner;
 import java.util.Stack;
+import java.util.Scanner;
 
-/**
- *  Name:
- *  Class Group:
- */
 public class CA3_Question2
 {
-    /*
-        Starter function to create the 2D array and populate it with 0
+    public static void main(String[] args)
+    {
+        int size = 10;
+        int[][] area = new int[size][size];
+        Scanner keyboard = new Scanner(System.in);
 
-     */
-    public static int[][]  floodFillStart() {
-        Scanner kb = new Scanner(System.in);
-        int[][] arr = new int[10][10];
-        for (int x = 0; x < 10; x++)
+
+        System.out.println("Enter starting row (0 - 9)");
+        int sRow = keyboard.nextInt();
+        System.out.println("Enter starting column (0 - 9)");
+        int sCol = keyboard.nextInt();
+
+        Stack<Pair> fill = new Stack<Pair>();
+        fill.push(new Pair(sRow, sCol));
+
+        int startingNum = 1;
+        while(!fill.isEmpty())
         {
-            for (int y = 0; y < 10; y++)
+            //Pop off the (row, column) pair from the top of the stack.
+            Pair current = fill.pop();
+            int cRow = current.row;
+            int cCol = current.col;
+
+            //If it has not yet been filled, fill the corresponding cell location with a number
+            //1, 2, 3, and so on (this number is incremented at each step to show the order
+            //in which the square is filled).
+            if (cRow >= 0 && cRow < size && cCol >= 0 && cCol < size && area[cRow][cCol] == 0)
             {
-                arr[x][y] = 0;
+                area[cRow][cCol] = startingNum++;
+
+                //Push the coordinates of any unfilled neighbours in the north, east, south, or
+                //west direction on the stack.
+                fill.push(new Pair(cRow - 1, cCol)); // North
+                fill.push(new Pair(cRow + 1, cCol)); // South
+                fill.push(new Pair(cRow, cCol + 1)); // East
+                fill.push(new Pair(cRow, cCol - 1)); // West
             }
         }
-       return arr;
-    }
-    /*
-        Helper function to display the image
-     */
-    public static void display(int[][] arr)
-    {
-        for (int x = 0; x < 10; x++)
+
+        //When you are done (i.e.z stack is empty), print the entire 2D array.
+        for(int i = 0; i < size; i++)
         {
-            for (int y = 0; y < 10; y++)
+            for(int j = 0; j < size; j++)
             {
-                System.out.printf("%4d", arr[x][y]);
+                System.out.printf("%4d", area[i][j]);
             }
             System.out.println();
         }
     }
-    private static void fill(int r, int c, int[][] arr)
-    {
-
-    }
-
-    public static void start()
-    {
-       int[][] arr = floodFillStart();
-    }
-    public static void main(String[] args) {
-        start();
-    }
-
 }
